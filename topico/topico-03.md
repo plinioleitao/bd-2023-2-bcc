@@ -1,4 +1,4 @@
-## [Tópico 03] - Estruturas de armazenamento
+## [Tópico 03] - _Checklist_ de conceitos básicos
 ###### *by Prof. Plinio Sa Leitao-Junior (INF/UFG)*
 
 Distinga os seguintes termos, use os Capítulos 1 e 2 do livro Elmasri&Navathe [1].
