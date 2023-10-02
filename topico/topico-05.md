@@ -27,7 +27,7 @@ Para ilustrar a distinção entre **dados** e **metadados**, considere a figura 
 O **acesso** e a **interpretação** dos dados são, essencialmente, baseados nos metadados, pois eles apoiam a solução de questões tais como:
 - Em que local estão os dados?
 - Quais os caminhos (as alternativas) de acesso aos dados?
-- Dentre os caminhos conhecidos para o acesso aos dados, qual é o máis ágil?
+- Dentre os caminhos conhecidos para o acesso aos dados, qual é o mais ágil?
 - Como os dados estão estruturados?
 - Qual o conteúdo por trás desta sequência de caracteres (ou de bits)?
 - etc.
