@@ -6,7 +6,7 @@
 **Propriedades implícitas de BD**
 - Uma coleção logicamente coerente de dados com algum significado inerente; um arranjo aleatório de dados não pode ser considerado um banco de dados.
 - É projetado e construído com dados para um propósito específico; possui um grupo de usuários e algumas aplicações pré-concebidas, as quais esses usuários estão interessados.
-- Representa algum aspecto do mundo real; alteração neste mundo real são refletidas no banco de dados.
+- Representa algum aspecto do mundo real; alterações neste mundo real são refletidas no banco de dados.
 
 > **Em síntese …** Um banco de dados tem alguma fonte na qual os dados são derivados, alguma taxa de interação com eventos do mundo real, e uma audiência que está ativamente interessada em seu conteúdo.
 
