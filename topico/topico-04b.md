@@ -29,7 +29,7 @@ Foram identificados <ins>três perfis de usuário</ins> para o serviço:
 
 ### Dívida
 
-Cada <ins>débito (passado ou presente)</ins> é chamado de <ins>dívida</ins>. Uma dívida possui dois estados: 'em aberto' ou 'quitada'. 
+Cada <ins>débito (passado ou presente)</ins> é chamado de <ins>dívida</ins>. Denota um compromisso de pagamento, que expirou (data de vencimento) sem a quitação do mesmo. Uma dívida possui dois estados: 'em aberto' ou 'quitada'. 
 
 ### Envio da Dívida
 
