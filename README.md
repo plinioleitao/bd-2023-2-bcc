@@ -15,7 +15,7 @@ O plano da disciplina está disponível [aqui](./media/bd-2023-2-bcc-plano.pdf).
 - [Tópico 06a](./topico/topico-06a.md)
 - [Tópico 04b](./topico/topico-04b.md)
 - [Todos os tópicos](topico/topico-index.md)
-- [Análise das atividades]()
+- [Análise das atividades](./topico/tresultado.md)
 
 ### Avisos ativos
 
