@@ -25,7 +25,7 @@ Para esclarecer a distinção entre JUNÇÃO e UNIÃO (também INTERSEÇÃO e DI
 
 ∎ **AUX1 ← PADARIA ⋈ <sub>CodPadaria=CodP</sub> CARDAPIO_DIA**<br>
 
-|CodPadaria|NomePadaria|Pamor|PastelC|
+|CodPadaria|NomePadaria|CodP|PastelC|
 |-|-|-|-|
 |Pamor|Pão e Amor|Pamor|PastelC|
 |Pcasa|Pães de Casa|Pcasa|Esfirra|
