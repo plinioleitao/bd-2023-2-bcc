@@ -20,3 +20,7 @@ Clique [AQUI](../media/bd-2023-2-bcc-resumo.pdf) para ver as notas.
 LIVRO_EMPRESTIMOS (Nr_cartao) REFERENCES USUARIO (Nr_cartao)
 - Para cada livro cujo autor (ou coautor) é “Stephen King”, recupere o título e o número de cópias pertencentes à unidade da biblioteca cujo nome é “Central”. -> LIVRO_AUTOR (Cod_livro) REFERENCES LIVRO (Cod_livro); LIVRO_COPIAS (Cod_unidade) REFERENCES UNIDADE_BIBLIOTECA (Cod_unidade); LIVRO_COPIAS (Cod_livro) REFERENCES LIVRO (Cod_livro)
 
+#### Avaliação em 25/10/2023
+
+1. π <sub>Pnome</sub> ( FUNCIONARIO ⋈ <sub>Cpf = Fcpf</sub> DEPENDENTE )
+1. AUX ← π<sub>Cpf_gerente</sub> ( FUNCIONARIO ⋈ <sub>Cpf_supervisor = Cpf_gerente</sub> DEPARTAMENTO )<br>RESULT ← π<sub>Pnome</sub> ( FUNCIONARIO ⋈ <sub>Cpf = Cpf_gerente</sub> AUX )
