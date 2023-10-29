@@ -22,6 +22,6 @@ LIVRO_EMPRESTIMOS (Nr_cartao) REFERENCES USUARIO (Nr_cartao)
 
 #### Avaliação em 25/10/2023
 
-1. π <sub>Pnome</sub> ( FUNCIONARIO ⋈ <sub>Cpf = Fcpf</sub> DEPENDENTE )
-1. RESULT ← AUX ← π<sub>Cpf_gerente</sub> ( FUNCIONARIO ⋈ <sub>Cpf_supervisor = Cpf_gerente</sub> DEPARTAMENTO )<br>RESULT ← π<sub>Pnome</sub> ( FUNCIONARIO ⋈ <sub>Cpf = Cpf_gerente</sub> AUX )
-1. RESULT ← AUX ← π<sub>T1.Fcpf</sub> ( ρ <sub>T1</sub> (TRABALHA_EM) ⋈ <sub>T1.Fcpf = T2.Fcpf</sub> &#8743; <sub>T1.Pnr &#8800; T2.Pnr</sub> ρ T2 (TRABALHA_EM) )
+1. RESULT ← π <sub>Pnome</sub> ( FUNCIONARIO ⋈ <sub>Cpf = Fcpf</sub> DEPENDENTE )
+1. AUX ← π <sub>Cpf_gerente</sub> ( FUNCIONARIO ⋈ <sub>Cpf_supervisor = Cpf_gerente</sub> DEPARTAMENTO )<br>RESULT ← π<sub>Pnome</sub> ( FUNCIONARIO ⋈ <sub>Cpf = Cpf_gerente</sub> AUX )
+1. RESULT ← AUX ← π <sub>T1.Fcpf</sub> ( ρ <sub>T1</sub> (TRABALHA_EM) ⋈ <sub>T1.Fcpf = T2.Fcpf</sub> &#8743; <sub>T1.Pnr &#8800; T2.Pnr</sub> ρ <sub>T2</sub> (TRABALHA_EM) )
