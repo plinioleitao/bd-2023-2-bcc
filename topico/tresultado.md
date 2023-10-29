@@ -24,4 +24,4 @@ LIVRO_EMPRESTIMOS (Nr_cartao) REFERENCES USUARIO (Nr_cartao)
 
 1. π <sub>Pnome</sub> ( FUNCIONARIO ⋈ <sub>Cpf = Fcpf</sub> DEPENDENTE )
 1. RESULT ← AUX ← π<sub>Cpf_gerente</sub> ( FUNCIONARIO ⋈ <sub>Cpf_supervisor = Cpf_gerente</sub> DEPARTAMENTO )<br>RESULT ← π<sub>Pnome</sub> ( FUNCIONARIO ⋈ <sub>Cpf = Cpf_gerente</sub> AUX )
-1. RESULT ← AUX ← π<sub>T1.Fcpf</sub> ( ρ <sub>T1</sub> (TRABALHA_EM) ⋈ <sub>T1.Fcpf = T2.Fcpf &#8743; T1.Pnr &#8800; T2.Pnr/sub> ρ <sub>T2</sub> (TRABALHA_EM) )
+1. RESULT ← AUX ← π<sub>T1.Fcpf</sub> ( ρ <sub>T1</sub> (TRABALHA_EM) ⋈ <sub>T1.Fcpf = T2.Fcpf &#8743; T1.Pnr &#8800; T2.Pnr/sub> ρ T2 (TRABALHA_EM) )
