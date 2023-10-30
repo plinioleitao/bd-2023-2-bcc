@@ -33,4 +33,6 @@ Seja abaixo uma [*ilustração para o banco de dados*](../media/fig-mr-2.jpg) **
 1. ρ SUPERVISOR (π Cpf, Pnome (FUNCIONARIO) )<br>FUNCIONARIO &#8904; <sub>FUNCIONARIO.Cpf_supervisor = SUPERVISOR.Cpf</sub> SUPERVISOR
 1. ρ SUPERVISOR (Cpf_supervisor, Pnome_supervisor) (π Cpf, Pnome (FUNCIONARIO) )<br>π Pnome, Pnome_supervisor (FUNCIONARIO * SUPERVISOR ) 
 
+### Grupo 4: Motivador ++
+
 ### _Under Construction_
