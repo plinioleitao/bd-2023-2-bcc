@@ -30,4 +30,5 @@ LIVRO_EMPRESTIMOS (Nr_cartao) REFERENCES USUARIO (Nr_cartao)
 
 1. RESULT ← π <sub>FUN.Pnome, SUP.Pnome</sub> ( ρ FUN (FUNCIONARIO) ⋈ <sub>FUN.Cpf_supervisor = SUP.CPF</sub> ρ SUP (FUNCIONARIO) )
 1. JOAO_CPF ← π <sub>Cpf</sub> ( σ <sub>Pnome="Joao" &#8743; Unome="Silva"</sub> (FUNCIONARIO) )<br>
-JOAO_PROJETOS ← π <sub>Pnr</sub> ( JOAO_CPF ⋈ <sub>JOAO_CPF.Cpf = TRABALHAM_EM.Fcpf</sub> TRABALHA_EM )<br>
+JOAO_PROJETOS ← π <sub>Pnr</sub> ( JOAO_CPF ⋈ <sub>JOAO_CPF.Cpf = TRABALHA_EM.Fcpf</sub> TRABALHA_EM )<br>
+JOAO_PROJETOS_FUNC ← ( π <sub>Fcpf, Pnr</sub>TRABALHA_EM ) &#247; JOAO_PROJETOS<br>
