@@ -29,7 +29,10 @@ LIVRO_EMPRESTIMOS (Nr_cartao) REFERENCES USUARIO (Nr_cartao)
 #### Avaliação em 01/11/2023
 
 1. RESULT ← π <sub>FUN.Pnome, SUP.Pnome</sub> ( ρ FUN (FUNCIONARIO) ⋈ <sub>FUN.Cpf_supervisor = SUP.CPF</sub> ρ SUP (FUNCIONARIO) )
-1. 
+1. JOAO_CPF ← π <sub>Cpf</sub> ( σ <sub>Pnome="Joao" &#8743; Unome="Silva"</sub> (FUNCIONARIO) )<br>
+JOAO_DEPENDENTES ← π <sub>Fcpf, Nome_dependente</sub> ( JOAO_CPF ⋈ <sub>JOAO_CPF.Cpf = DEPENDENTE.Fcpf</sub> DEPENDENTE )<br>
+TODOS_DEPENDENTES ← π <sub>Cpf, Pnome, Fcpf, Nome_dependente</sub>( JOAO_DEPENDENTES ⋈ <sub>JOAO_DEPENDENTES.Fcpf = FUNCIONARIO.Cpf</sub> FUNCIONARIO )<br>
+RESULT ← π <sub>Pnome</sub> ( TODOS_DEPENDENTES &#247; JOAO_DEPENDENTE )
 1. PROJETOS_FUNC (Cpf, Qtde_projetos) ← Fcpf ℑ CONTA Fcpf ( TRABALHA_EM )<br>
 PROJETOS_FUNC_DOIS ← σ <sub>Qtde_projetos=2</sub> ( PROJETOS_FUNC )<br>
 RESULT ← π <sub>Pnome</sub> ( PROJETOS_FUNC_DOIS ⋈ <sub>PROJETOS_FUNC_DOIS.Cpf = FUNCIONARIO.Cpf</sub> FUNCIONARIO )
