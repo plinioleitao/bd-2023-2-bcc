@@ -33,3 +33,6 @@ LIVRO_EMPRESTIMOS (Nr_cartao) REFERENCES USUARIO (Nr_cartao)
 JOAO_PROJETOS ← π <sub>Pnr</sub> ( JOAO_CPF ⋈ <sub>JOAO_CPF.Cpf = TRABALHA_EM.Fcpf</sub> TRABALHA_EM )<br>
 JOAO_PROJETOS_FUNC ← ( π <sub>Fcpf, Pnr</sub>TRABALHA_EM ) &#247; JOAO_PROJETOS<br>
 RESULT ← π <sub>Pnome</sub> ( JOAO_PROJETOS_FUNC ⋈ <sub>JOAO_PROJETOS_FUNC.Fcpf = FUNCIONARIO.Cpf</sub> FUNCIONARIO )
+1. PROJETOS_FUNC (Cpf, Qtde_projetos) ← Fcpf ℑ CONTA Fcpf ( TRABALHA_EM )<br>
+PROJETOS_FUNC_DOIS ← σ <sub>Qtde_projetos=2</sub> ( PROJETOS_FUNC )<br>
+RESULT ← π <sub>Pnome</sub> ( PROJETOS_FUNC_DOIS ⋈ <sub>PROJETOS_FUNC_DOIS.Cpf = FUNCIONARIO.Cpf</sub> FUNCIONARIO )
