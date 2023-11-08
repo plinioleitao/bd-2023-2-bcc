@@ -17,6 +17,9 @@
 1. Clique em ''use Group in editor'.
 1. Escreva e execute algumas consultas para o BD Empresa.
 
-### Exercício
+### Exercício para o uso da ferramenta
+
+Execute as expressões em álgebra relacional presente no [Tópico 15](./topico-15.md).<br>
+**É necessário alterar a sintaxe de algumas das expressões?**
 
 Escreva em Álgebra Relacional as consultas presentes no [Tópico 16b](./topico-16b.md).
