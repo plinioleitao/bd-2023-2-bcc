@@ -38,3 +38,16 @@ RESULT ← TODOS_DEPENDENTES &#247; JOAO_DEPENDENTES<br>
 1. PROJETOS_FUNC (Cpf, Qtde_projetos) ← Fcpf ℑ CONTA Fcpf ( TRABALHA_EM )<br>
 PROJETOS_FUNC_DOIS ← σ <sub>Qtde_projetos=2</sub> ( PROJETOS_FUNC )<br>
 RESULT ← π <sub>Pnome</sub> ( PROJETOS_FUNC_DOIS ⋈ <sub>PROJETOS_FUNC_DOIS.Cpf = FUNCIONARIO.Cpf</sub> FUNCIONARIO )
+
+#### Avaliação em 08/11/2023
+
+1. CERVEJA_PIPOCA ← π <sub>Cerveja</sub> ( σ <sub>Bar="Pipoca"</sub> ( VENDE ) )<br>
+RESULT ← π <sub>Pessoa</sub> ( CERVEJA_PIPOCA ⋈ <sub>CERVEJA_PIPOCA.Cerveja = GOSTA.Cerveja</sub> GOSTA )
+1. CERVEJA_PIPOCA ← π <sub>Cerveja</sub> ( σ <sub>Bar="Pipoca"</sub> ( VENDE ) )<br>
+PESSOA_PIPOCA ← π <sub>Pessoa</sub> ( CERVEJA_PIPOCA ⋈ <sub>CERVEJA_PIPOCA.Cerveja = GOSTA.Cerveja</sub> GOSTA )<br>
+RESULT ← π <sub>Pessoa</sub> ( GOSTA )  &#8213; PESSOA_PIPOCA
+1. CERVEJA_PIPOCA ← π <sub>Cerveja</sub> ( σ <sub>Bar="Pipoca"</sub> ( VENDE ) )<br>
+CERVEJA_NAO_PIPOCA ← π <sub>Cerveja</sub> ( VENDE ) &#8213; CERVEJA_PIPOCA<br>
+PESSOA_NAO_PIPOCA ← π <sub>Pessoa</sub> ( CERVEJA_NAO_PIPOCA ⋈ <sub>CERVEJA_NAO_PIPOCA.Cerveja = GOSTA.Cerveja</sub> GOSTA )<br>
+RESULT ← π <sub>Pessoa</sub> ( GOSTA )  &#8213; PESSOA_NAO_PIPOCA
+
