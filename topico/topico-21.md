@@ -39,7 +39,7 @@ Funções agregadas e agrupamento de dados estão presentes na SQL de forma simi
 
 |Álgebra Relacional|SQL|
 |-|-|
-|ℑ CONTA Salario (π <sub>Salario</sub>FUNCIONARIO)|SELECT Count(\*)<br>FROM ( <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT DISTINCT Salario<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FROM FUNCIONARIO ) AS S<br><br>SELECT COUNT(DISTINCT Salario)<br>FROM FUNCIONARIO|
+|ℑ CONTA Salario (π <sub>Salario</sub>FUNCIONARIO)|SELECT Count(Salario)<br>FROM ( <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT DISTINCT Salario<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FROM FUNCIONARIO ) AS S<br><br>SELECT COUNT(DISTINCT Salario)<br>FROM FUNCIONARIO|
 
 ### Exemplo 03: Funções agregadas
 #### Quantos funcionários são supervisores na empresa?
