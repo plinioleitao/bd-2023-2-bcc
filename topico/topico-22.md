@@ -1,9 +1,47 @@
-## [Tópico 22] - SQL - DML (_Data Manipulation Language_): Subconsulta (parte 1)
+## [Tópico 22] - SQL - DML (_Data Manipulation Language_): União, Interseção, Diferença, Subconsulta (primeiros passos)
 ###### *by Prof. Plinio Sa Leitao-Junior (INF/UFG)*
 
 Os exemplos apresentados usam o esquema lógico do **BD Empresa**, conforme abaixo.
 
 <img src="../media/fig-esquema-logico-bdempresa.jpg" width="450">
+
+### União, Interseção e Diferença
+
+As operações União, Interseção e Diferença estão disponíveis na SQL com o uso das cláusulas UNION, INTERSECT e EXCEPT, respectivamente:
+- Contudo há outras construções sintáticas que implementam essas operações.
+- A restrição de união-compatibilidade é requerida na SQL, similarmente à Álgebra Relacional.
+
+### Exemplo 01: União
+#### Quais os funcionários que são supervisores ou gerentes de departamento?
+
+|Álgebra Relacional|SQL|
+|-|-|
+|π <sub>Cpf_supervisor</sub> (FUNCIONARIO)<br>∪<br>π <sub>Cpf_gerente</sub> (DEPARTAMENTO)|SELECT Cpf_supervisor <br>FROM FUNCIONARIO<br>UNION<br>SELECT Cpf_gerente <br>FROM DEPARTAMENTO|
+|π <sub>S.Cpf, S.Pnome, S.Unome</sub><br>&nbsp;&nbsp;( ρ <sub>S</sub> (FUNCIONARIO)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⨝ <sub>F.Cpf_supervisor = S.Cpf</sub><br>&nbsp;&nbsp;&nbsp;&nbsp;ρ <sub>F</sub> (FUNCIONARIO) )<br>∪<br>π <sub>F.Cpf, F.Pnome, F.Unome</sub><br>&nbsp;&nbsp;( ρ <sub>D</sub> (DEPARTAMENTO)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⨝ <sub>D.Cpf_gerente = F.Cpf</sub><br>&nbsp;&nbsp;&nbsp;&nbsp;ρ <sub>F</sub> (FUNCIONARIO) )|SELECT S.Cpf, S.Pnome, S.Unome<br>FROM FUNCIONARIO AS F JOIN FUNCIONARIO AS S<br>&nbsp;&nbsp;&nbsp;&nbsp;ON F.Cpf_supervisor = S.Cpf<br>UNION<br>SELECT F.Cpf, F.Pnome, F.Unome <br>FROM DEPARTAMENTO AS D JOIN FUNCIONARIO AS F<br>&nbsp;&nbsp;&nbsp;&nbsp;ON D.Cpf_gerente = F.Cpf<br><br>**_# O comando abaixo está incorreto?_**<br>SELECT S.Cpf, S.Pnome <br>FROM FUNCIONARIO AS F JOIN FUNCIONARIO AS S<br>&nbsp;&nbsp;&nbsp;&nbsp;ON F.Cpf_supervisor = S.Cpf<br>UNION<br>SELECT F.Cpf, F.Pnome, F.Unome <br>FROM DEPARTAMENTO AS D JOIN FUNCIONARIO AS F<br>&nbsp;&nbsp;&nbsp;&nbsp;ON D.Cpf_gerente = F.Cpf|
+
+### Exemplo 02: Interseção
+#### Quais os funcionários que são supervisores e possuem dependentes?
+
+|Álgebra Relacional|SQL|
+|-|-|
+|π <sub>Cpf_supervisor</sub> (FUNCIONARIO)<br>∩<br>π <sub>Fcpf</sub> (DEPENDENTE)|SELECT Cpf_supervisor<br>FROM FUNCIONARIO<br>INTERSECT<br>SELECT FCpf<br>FROM DEPENDENTE|
+|π <sub>S.Cpf, S.Pnome, S.Unome</sub><br>&nbsp;&nbsp;( ρ <sub>S</sub> (FUNCIONARIO)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⨝ <sub>F.Cpf_supervisor = S.Cpf</sub><br>&nbsp;&nbsp;&nbsp;&nbsp;ρ <sub>F</sub> (FUNCIONARIO) )<br>∩<br>π <sub>F.Cpf, F.Pnome, F.Unome</sub><br>&nbsp;&nbsp;( ρ <sub>D</sub> (DEPENDENTE)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⨝ <sub>D.Fcpf = F.Cpf</sub><br>&nbsp;&nbsp;&nbsp;&nbsp;ρ <sub>F</sub> (FUNCIONARIO) )|SELECT S.Cpf, S.Pnome, S.Unome<br>FROM FUNCIONARIO AS F JOIN FUNCIONARIO AS S<br>&nbsp;&nbsp;&nbsp;&nbsp;ON F.Cpf_supervisor = S.Cpf<br>INTERSECT<br>SELECT F.Cpf, F.Pnome, F.Unome <br>FROM DEPENDENTE AS D JOIN FUNCIONARIO AS F<br>&nbsp;&nbsp;&nbsp;&nbsp;ON D.Fcpf = F.Cpf|
+
+### Exemplo 03: Diferença
+#### Quais os funcionários que são supervisores e não possuem dependentes?
+
+|Álgebra Relacional|SQL|
+|-|-|
+|π <sub>Cpf_supervisor</sub> (FUNCIONARIO)<br>–<br>π <sub>Fcpf</sub> (DEPENDENTE)|SELECT Cpf_supervisor<br>FROM FUNCIONARIO<br>EXCEPT<br>SELECT FCpf<br>FROM DEPENDENTE|
+|π <sub>S.Cpf, S.Pnome, S.Unome</sub><br>&nbsp;&nbsp;( ρ <sub>S</sub> (FUNCIONARIO)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⨝ <sub>F.Cpf_supervisor = S.Cpf</sub><br>&nbsp;&nbsp;&nbsp;&nbsp;ρ <sub>F</sub> (FUNCIONARIO) )<br>–<br>π <sub>F.Cpf, F.Pnome, F.Unome</sub><br>&nbsp;&nbsp;( ρ <sub>D</sub> (DEPENDENTE)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⨝ <sub>D.Fcpf = F.Cpf</sub><br>&nbsp;&nbsp;&nbsp;&nbsp;ρ <sub>F</sub> (FUNCIONARIO) )|SELECT S.Cpf, S.Pnome, S.Unome<br>FROM FUNCIONARIO AS F JOIN FUNCIONARIO AS S<br>&nbsp;&nbsp;&nbsp;&nbsp;ON F.Cpf_supervisor = S.Cpf<br>EXCEPT<br>SELECT F.Cpf, F.Pnome, F.Unome <br>FROM DEPENDENTE AS D JOIN FUNCIONARIO AS F<br>&nbsp;&nbsp;&nbsp;&nbsp;ON D.Fcpf = F.Cpf|
+
+### Exemplo 04: Diferença
+#### Quais os funcionários que possuem dependentes e não são supervisores?
+
+|Álgebra Relacional|SQL|
+|-|-|
+|π <sub>Fcpf</sub> (DEPENDENTE)<br>–<br>π <sub>Cpf_supervisor</sub> (FUNCIONARIO)|SELECT FCpf<br>FROM DEPENDENTE<br>EXCEPT<br>SELECT Cpf_supervisor<br>FROM FUNCIONARIO|
+|π <sub>F.Cpf, F.Pnome, F.Unome</sub><br>&nbsp;&nbsp;( ρ <sub>D</sub> (DEPENDENTE)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⨝ <sub>D.Fcpf = F.Cpf</sub><br>&nbsp;&nbsp;&nbsp;&nbsp;ρ <sub>F</sub> (FUNCIONARIO) )<br>–<br>π <sub>S.Cpf, S.Pnome, S.Unome</sub><br>&nbsp;&nbsp;( ρ <sub>S</sub> (FUNCIONARIO)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⨝ <sub>F.Cpf_supervisor = S.Cpf</sub><br>&nbsp;&nbsp;&nbsp;&nbsp;ρ <sub>F</sub> (FUNCIONARIO) )|SELECT F.Cpf, F.Pnome, F.Unome <br>FROM DEPENDENTE AS D JOIN FUNCIONARIO AS F<br>&nbsp;&nbsp;&nbsp;&nbsp;ON D.Fcpf = F.Cpf<br>EXCEPT<br>SELECT S.Cpf, S.Pnome, S.Unome<br>FROM FUNCIONARIO AS F JOIN FUNCIONARIO AS S<br>&nbsp;&nbsp;&nbsp;&nbsp;ON F.Cpf_supervisor = S.Cpf|
 
 ### Subconsulta
 
@@ -21,101 +59,14 @@ Um classificação comum para subconsultas é:
     - a subconsulta é avaliada uma vez para cada _tupla_ (ou combinação de _tuplas_) na consulta externa.
   - a subconsulta requer dados oriundos da consulta externa para ser processada.
 
-### Cláusula IN
-
-A Cláusula **IN** é similar à operação de conjuntos "se pertence":<br>
-■ Por exemplo, "_o elemento **a** pertence ao conjunto **C**?_" Ou seja, "**a ∈ C**?"
-
-### Exemplo 01: Cláusula IN
-#### Qual o nome dos funcionários que possuem o menor salário na empresa?
-
-|Classificação|SQL|
-|-|-|
-|Subconsulta independente|SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE Salario IN (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT MIN(Salario)**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM FUNCIONARIO** )<br><br>SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE Salario = (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT MIN(Salario)**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM FUNCIONARIO** )|
-
-### Exemplo 02: Cláusula IN
+### Exemplo 05: Subconsulta
 #### Qual o nome dos funcionários que são gerentes de departamento?
 
 |Classificação|SQL|
 |-|-|
-|Subconsulta independente|SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE Cpf IN (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT Cpf_gerente**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM DEPARTAMENTO** )<br><br>**_# Comando abaixo está correto?_**<br>SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE Cpf = (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT Cpf_gerente**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM DEPARTAMENTO** )|
+|Subconsulta independente|SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE Cpf IN (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT Cpf_gerente**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM DEPARTAMENTO** )|
+|Subconsulta correlata|SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE EXISTS (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT \***<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM DEPARTAMENTO**<br>&nbsp;&nbsp;&nbsp;&nbsp;**WHERE FUNCIONARIO.Cpf = DEPARTAMENTO.Cpf_gerente** )|
 
-### Exemplo 03: Cláusula NOT IN
-#### Qual o nome dos funcionários que não possuem o menor salário nem o maior salário?
+### Exercício
 
-|Classificação|SQL|
-|-|-|
-|Subconsulta independente|SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE Salario NOT IN (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT MIN(Salario)**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM FUNCIONARIO** )<br>AND&nbsp;&nbsp;&nbsp;Salario NOT IN (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT MAX(Salario)**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM FUNCIONARIO** )<br><br>SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE Salario > (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT MIN(Salario)**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM FUNCIONARIO** )<br>AND&nbsp;&nbsp;&nbsp;Salario < (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT MAX(Salario)**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM FUNCIONARIO** )|
-
-### Exemplo 04: Cláusula NOT IN
-#### Qual o nome dos funcionários que trabalham 10 horas em algum projeto?
-
-|Classificação|SQL|
-|-|-|
-|Subconsulta independente|**_# A consulta abaixo deveria retornar tuplas iguais?_**<br>SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE (Cpf, 10) IN<br>&nbsp;&nbsp;&nbsp;&nbsp;( **SELECT Fcpf, Horas**<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**FROM TRABALHA_EM** )|
-
-### Cláusula EXISTS
-
-A cláusula (função?) EXISTS é utilizada para verificar se o resultado de uma subconsulta retorna alguma _tupla_:<br>
-&#9888; **True**, se a subconsulta retornar uma ou mais _tuplas_;<br>
-&#9888; **False**, se a subconsulta não retornar qualquer _tupla_.
-
-A Cláusula EXISTS é usualmente aplicada em subconsultas correlatas.
-
-### Exemplo 05: EXISTS
-#### Qual o nome dos funcionários que "possuem dependentes"?
-
-|Classificação|SQL|
-|-|-|
-|Subconsulta correlata|SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE EXISTS (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT \***<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM DEPENDENTE**<br>&nbsp;&nbsp;&nbsp;&nbsp;**WHERE FUNCIONARIO.Cpf = DEPENDENTE.Fcpf** )<br><br>SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE EXISTS (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT NULL**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM DEPENDENTE**<br>&nbsp;&nbsp;&nbsp;&nbsp;**WHERE FUNCIONARIO.Cpf = DEPENDENTE.Fcpf** )|
-
-### Exemplo 06: EXISTS
-#### Qual o nome dos funcionários que "não possuem dependentes"?
-
-|Classificação|SQL|
-|-|-|
-|Subconsulta correlata|SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE NOT EXISTS (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT \***<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM DEPENDENTE**<br>&nbsp;&nbsp;&nbsp;&nbsp;**WHERE FUNCIONARIO.Cpf = DEPENDENTE.Fcpf** )<br><br>SELECT Pnome, Unome<br>FROM FUNCIONARIO<br>WHERE NOT EXISTS (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT 1**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM DEPENDENTE**<br>&nbsp;&nbsp;&nbsp;&nbsp;**WHERE FUNCIONARIO.Cpf = DEPENDENTE.Fcpf** )|
-
-### Exemplo 07: EXISTS e Operadores '<' e '>'
-#### Qual o nome e salário dos funcionários que "não têm o maior salário na empresa"?
-
-|Classificação|SQL|
-|-|-|
-|Subconsulta correlata|SELECT Pnome, Unome, Salario<br>FROM FUNCIONARIO AS EXTERNA<br>WHERE EXISTS (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT \***<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM FUNCIONARIO AS INTERNA**<br>&nbsp;&nbsp;&nbsp;&nbsp;**WHERE INTERNA.Salario > EXTERNA.Salario** )|
-
-#### Qual o nome e salário dos funcionários que "têm o menor salário na empresa"?
-
-|Classificação|SQL|
-|-|-|
-|Subconsulta correlata|SELECT Pnome, Unome, Salario<br>FROM FUNCIONARIO AS EXTERNA<br>WHERE NOT EXISTS (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT \***<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM FUNCIONARIO AS INTERNA**<br>&nbsp;&nbsp;&nbsp;&nbsp;**WHERE INTERNA.Salario < EXTERNA.Salario** )|
-
-### Exemplo 08: Operadores '<' e '>' e Funções Agregadas
-#### Qual o nome e salário dos funcionários que "estão entre os três maiores salários da empresa"?
-
-|Classificação|SQL|
-|-|-|
-|Subconsulta correlata|SELECT Pnome, Unome, Salario<br>FROM FUNCIONARIO AS EXTERNA<br>WHERE 3 > (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT COUNT(DISTINCT Salario)**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM FUNCIONARIO AS INTERNA**<br>&nbsp;&nbsp;&nbsp;&nbsp;**WHERE INTERNA.Salario > EXTERNA.Salario** )|
-
-#### Qual o nome e salário dos funcionários que "estão entre os dois menores salários da empresa"?
-
-|Classificação|SQL|
-|-|-|
-|Subconsulta correlata|SELECT Pnome, Unome, Salario<br>FROM FUNCIONARIO AS EXTERNA<br>WHERE 1 >= (<br>&nbsp;&nbsp;&nbsp;&nbsp;**SELECT COUNT(DISTINCT Salario)**<br>&nbsp;&nbsp;&nbsp;&nbsp;**FROM FUNCIONARIO AS INTERNA**<br>&nbsp;&nbsp;&nbsp;&nbsp;**WHERE INTERNA.Salario < EXTERNA.Salario** )|
-
-### Exercícios
-
-Seja o banco de dados de uma empresa varejista, em que há a relação PRODUTO com o seguinte esquema:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**PRODUTO (<ins>CodProduto</ins>, Nome, PrecoUnitario)**<br>
-Suponha que há dezenas de preços unitários distintos nos produtos que a empresa vende.
-
-1. Escreva em SQL, use subconsulta(s) independente(s):<br>
-_Qual o código e o nome dos produtos que possuem os **N** preços unitários mais caros_?<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**N** é o número de letras do seu primeiro nome.<br>
-Por exemplo, se o seu primeiro nome for 'Maria':<br>
-&#8718; _Qual o código e o nome dos produtos que possuem os cinco preços unitários mais caros_?
-
-1. Escreva em SQL, use subconsulta(s) correlata(s):<br>
-_Qual o código e o nome dos produtos que possuem os **N** preços unitários mais baratos_?<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**N** é o número de letras do seu primeiro nome.<br>
-Por exemplo, se o seu primeiro nome for 'Maria', então:<br>
-&#8718; _Qual o código e o nome dos produtos que possuem os cinco preços unitários mais baratos_?
+1. Em relação ao BD Empresa, escreva em SQL a consulta "Qual o primeiro e último nomes dos funcionários que possuem dois ou mais dependentes e que trabalham em dois ou mais projetos?"<br>O comando SQL deve:<br>■ usar pelo menos uma das operações UNIÃO, INTERSEÇÃO e DIFERENÇA, necessariamente conforme a sintaxe apresentada no tópico;<br>■ usar a cláusula HAVING.
