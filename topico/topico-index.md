@@ -1,3 +1,4 @@
+[Tópico 22](./topico-22.md) - SQL - DML (Data Manipulation Language): União, Interseção, Diferença, Subconsulta (primeiros passos)<br>
 [Tópico 21](./topico-21.md) - SQL - DML (Data Manipulation Language): Funções Agregadas, Agrupamento de dados, Ordenação de Dados<br>
 [Tópico 20](./topico-20.md) - SQL - DML (Data Manipulation Language): Junção, Junção Natural, Valor nulo, Junção Externa<br>
 [Tópico 19](./topico-19.md) - SQL - DML (_Data Manipulation Language_): Primeiros comandos<br>
