@@ -51,3 +51,21 @@ CERVEJA_NAO_PIPOCA ← π <sub>Cerveja</sub> ( VENDE ) &#8213; CERVEJA_PIPOCA<br
 PESSOA_NAO_PIPOCA ← π <sub>Pessoa</sub> ( CERVEJA_NAO_PIPOCA ⋈ <sub>CERVEJA_NAO_PIPOCA.Cerveja = GOSTA.Cerveja</sub> GOSTA )<br>
 RESULT ← π <sub>Pessoa</sub> ( GOSTA )  &#8213; PESSOA_NAO_PIPOCA
 
+#### Avaliação em 29/11/2023
+
+1. SELECT P.CodProd, P.Nome, SUM (VI.QtdeVenda), SUM (VI.QtdeVenda * P.Preco)<br>
+FROM PRODUTO AS P<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOIN VENDA_ITEM AS VI ON P.CodProd = VI.CodProd<br>
+GROUP BY P.CodProd, P.Nome
+1. SELECT P.CodProd, P.Nome<br>
+FROM PRODUTO AS P<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOIN VENDA_ITEM AS VI ON P.CodProd = VI.CodProd<br>
+GROUP BY P.CodProd, P.Nome<br>
+HAVING SUM (VI.QtdeVenda * P.Preco) > 10000
+1. SELECT C.CPF, C.Nome, SUM (VI.QtdeVenda), SUM (VI.QtdeVenda * P.Preco)<br>
+FROM CLIENTE AS C<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOIN VENDA AS V	ON C.CPF = V.CPF<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOIN VENDA_ITEM AS VI ON V.NumNF = VI.NumNF<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOIN PRODUTO AS P ON VI.CodProd = P.CodProd<br>
+GROUP BY C.CPF, C.Nome
+
