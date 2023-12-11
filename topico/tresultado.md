@@ -103,3 +103,10 @@ EXCEPT<br>
 SELECT Cliente<br> 
 FROM USA NATURAL JOIN FABRICA<br>
 WHERE Unidade = 'Central'
+1. SELECT DISTINCT Cliente FROM USA<br>
+WHERE Cliente NOT IN (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT Cliente<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FROM USA<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHERE Produto NOT IN (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT Produto FROM FABRICA<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHERE Unidade = 'Central' ) )
