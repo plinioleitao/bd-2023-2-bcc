@@ -93,5 +93,8 @@ INSERT INTO USA VALUES ('Pedro', 'Monitor');<br>
 INSERT INTO USA VALUES ('Pedro', 'Mouse');<br>
 INSERT INTO USA VALUES ('Ricardo', 'Guardanapo');<br>
 
-
-1. SELECT P.CodProd, P.Nome, SUM(VI.QtdeVenda), SUM(VI.QtdeVenda * P.Preco)<br>
+1. SELECT DISTINCT Cliente FROM USA<br>
+WHERE Produto IN (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT Produto FROM FABRICA WHERE Unidade = 'Central'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXCEPT<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT Produto FROM FABRICA WHERE Unidade != 'Central' )<br>
