@@ -69,3 +69,29 @@ FROM CLIENTE AS C<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JOIN PRODUTO AS P ON VI.CodProd = P.CodProd<br>
 GROUP BY C.CPF, C.Nome
 
+#### Avaliação em 06/12/2023
+
+Script para o BD<br>
+CREATE TABLE FABRICA ( Unidade varchar(30), Produto varchar(30));<br>
+INSERT INTO FABRICA VALUES ('Central', 'Bola');<br>
+INSERT INTO FABRICA VALUES ('Central', 'Mouse');<br>
+INSERT INTO FABRICA VALUES ('Central', 'Teclado');<br>
+INSERT INTO FABRICA VALUES ('Central', 'Monitor');<br>
+INSERT INTO FABRICA VALUES ('Central', 'Guardanapo');<br>
+INSERT INTO FABRICA VALUES ('Praia', 'Bola');<br>
+INSERT INTO FABRICA VALUES ('Praia', 'Cadeira');<br>
+INSERT INTO FABRICA VALUES ('Praia', 'Mouse');<br>
+INSERT INTO FABRICA VALUES ('Interior', 'Carro');<br>
+INSERT INTO FABRICA VALUES ('Interior', 'Computador');<br>
+CREATE TABLE USA ( Cliente varchar(30), Produto varchar(30));<br>
+INSERT INTO USA VALUES ('Lia', 'Bola');<br>
+INSERT INTO USA VALUES ('Lia', 'Cadeira');<br>
+INSERT INTO USA VALUES ('Maria', 'Computador');<br>
+INSERT INTO USA VALUES ('Maria', 'Carro');<br>
+INSERT INTO USA VALUES ('Pedro', 'Teclado');<br>
+INSERT INTO USA VALUES ('Pedro', 'Monitor');<br>
+INSERT INTO USA VALUES ('Pedro', 'Mouse');<br>
+INSERT INTO USA VALUES ('Ricardo', 'Guardanapo');<br>
+
+
+1. SELECT P.CodProd, P.Nome, SUM(VI.QtdeVenda), SUM(VI.QtdeVenda * P.Preco)<br>
