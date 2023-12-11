@@ -97,4 +97,9 @@ INSERT INTO USA VALUES ('Ricardo', 'Guardanapo');<br>
 WHERE Produto IN (<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT Produto FROM FABRICA WHERE Unidade = 'Central'<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXCEPT<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT Produto FROM FABRICA WHERE Unidade != 'Central' )<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SELECT Produto FROM FABRICA WHERE Unidade != 'Central' )
+1. SELECT Cliente FROM USA<br>
+EXCEPT<br>
+SELECT Cliente<br> 
+FROM USA NATURAL JOIN FABRICA<br>
+WHERE Unidade = 'Central'
