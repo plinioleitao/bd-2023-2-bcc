@@ -80,4 +80,4 @@ DEMANDAS INFORMACIONAIS - ASSOCIADO:
 
 Um rascunho ...
 
-<img src="../media/fig-ecred.jpg" width="520">
+<img src="../media/fig-ecred.jpg" width="700">
