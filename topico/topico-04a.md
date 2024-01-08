@@ -58,6 +58,10 @@ Leia e releia os requisitos de dados pertinentes ao **BD Empresa**.
 **Consulta 5:** ...<br>
 Importante: Evite consultas (demandas informacionais) simples, tal como "Quais os nomes dos funcionários de sexo masculino?".
 
+Um rascunho ...
+
+<img src="../media/fig-ecred.jpg" width="320">
+
 ### Bibliografia
 
 [1] ELMASRI, R.; NAVATHE, S. B. Sistemas de Banco de Dados. 6. ed. Pearson, 2011.
