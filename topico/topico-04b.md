@@ -78,6 +78,6 @@ DEMANDAS INFORMACIONAIS - ASSOCIADO:
 1. Qual o histórico de cálculo do Indicador Z para o Cliente X?
 1. Quais os clientes possuem o mesmo nome fonetizado de "HEDMAR DE SOUSA SILVA"? Nesse caso, o nome fonetizado poderia ser "EDIMARSOUZACIUVA". 
 
-Um rascunho ...
+Um rascunho ... EERCASE
 
 <img src="../media/fig-ecred.jpg" width="700">
